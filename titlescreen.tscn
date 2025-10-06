@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://wk4uemsoqurx"]
+
+[ext_resource type="Script" path="res://title_button.gd" id="1_cyiop"]
+[ext_resource type="Texture2D" uid="uid://dcm61kiwr2ttv" path="res://Images/Untitled 7.png" id="1_h3egb"]
+
+[node name="titlescreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 549.0
+offset_top = 388.0
+offset_right = 610.0
+offset_bottom = 442.0
+scale = Vector2(5.69535, 3.74878)
+script = ExtResource("1_cyiop")
+
+[node name="Untitled7" type="Sprite2D" parent="."]
+z_index = -4
+position = Vector2(566, 315)
+scale = Vector2(0.35978, 0.365202)
+texture = ExtResource("1_h3egb")

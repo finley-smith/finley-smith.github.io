@@ -1,0 +1,119 @@
+[gd_scene load_steps=14 format=3 uid="uid://di3650r1aq8wk"]
+
+[ext_resource type="Script" path="res://hoppibarra.gd" id="1_xraew"]
+[ext_resource type="Script" path="res://game.gd" id="1_yl04a"]
+[ext_resource type="Texture2D" uid="uid://btienvti4w030" path="res://Images/Untitled15.png" id="2_0ccxg"]
+[ext_resource type="PackedScene" uid="uid://c5l6rrdad0dxj" path="res://car.tscn" id="2_5850w"]
+[ext_resource type="Texture2D" uid="uid://b24856mqvynk1" path="res://Images/hoppi_level1.png" id="3_frd41"]
+[ext_resource type="Script" path="res://background.gd" id="3_hsjcd"]
+[ext_resource type="Texture2D" uid="uid://c0lqkflndb16m" path="res://Images/Untitled16.png" id="6_wf16s"]
+[ext_resource type="Texture2D" uid="uid://dqwave7q2n3yt" path="res://Images/Untitled20.png" id="7_iw17b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o6lgu"]
+size = Vector2(184.722, 127.941)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_woard"]
+size = Vector2(177, 166)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hfqx2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0ccxg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wf16s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_iw17b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wf16s")
+}],
+"loop": true,
+"name": &"hoppiwalk",
+"speed": 8.0
+}]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_n6fxv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v1qy3"]
+size = Vector2(2448, 43)
+
+[node name="Node" type="Node" node_paths=PackedStringArray("spawn_position", "score_label")]
+script = ExtResource("1_yl04a")
+car_red = ExtResource("2_5850w")
+spawn_position = NodePath("SpawnPosition")
+score_label = NodePath("Score")
+metadata/index = 0
+
+[node name="hoppibarra" type="CharacterBody2D" parent="." node_paths=PackedStringArray("death_hitbox")]
+position = Vector2(-161, 144)
+scale = Vector2(0.72, 0.68)
+script = ExtResource("1_xraew")
+death_hitbox = NodePath("death_hitbox")
+
+[node name="Sprite2D" type="Sprite2D" parent="hoppibarra"]
+visible = false
+position = Vector2(538, 550)
+scale = Vector2(0.342817, 0.35792)
+texture = ExtResource("2_0ccxg")
+
+[node name="death_hitbox" type="Area2D" parent="hoppibarra"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hoppibarra/death_hitbox"]
+position = Vector2(549.306, 394.853)
+shape = SubResource("RectangleShape2D_o6lgu")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="hoppibarra"]
+position = Vector2(547, 420)
+shape = SubResource("RectangleShape2D_woard")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="hoppibarra"]
+position = Vector2(537.5, 550)
+scale = Vector2(0.333333, 0.352941)
+sprite_frames = SubResource("SpriteFrames_hfqx2")
+animation = &"hoppiwalk"
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Parallax2D2" type="Parallax2D" parent="Node2D"]
+z_index = -10
+scale = Vector2(1, 0.9)
+scroll_offset = Vector2(-81, -13)
+repeat_size = Vector2(6000, 0)
+autoscroll = Vector2(-300, 0)
+limit_begin = Vector2(0, -1e+07)
+limit_end = Vector2(100, 1e+07)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(1, -49)
+physics_material_override = SubResource("PhysicsMaterial_n6fxv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(613, 583)
+shape = SubResource("RectangleShape2D_v1qy3")
+
+[node name="Node2D2" type="Node2D" parent="."]
+position = Vector2(-3300, 0)
+script = ExtResource("3_hsjcd")
+
+[node name="HoppiLevel1" type="Sprite2D" parent="Node2D2"]
+z_index = -1
+position = Vector2(3371, 320)
+scale = Vector2(0.64, 0.64)
+texture = ExtResource("3_frd41")
+
+[node name="SpawnPosition" type="Node2D" parent="."]
+position = Vector2(1689, 492)
+
+[node name="Score" type="RichTextLabel" parent="."]
+offset_left = 18.0
+offset_top = 18.0
+offset_right = 119.0
+offset_bottom = 87.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 50
+text = "Test"
+fit_content = true
+autowrap_mode = 0
